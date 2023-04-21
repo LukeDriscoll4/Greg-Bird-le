@@ -1,0 +1,423 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Graduate&family=Roboto+Mono&display=swap');
+
+$background-color: #003049;
+$title-color: #d62828;
+$text-color: #d62828;
+$attemptbox-color: #fcbf49;
+$correct-color: #98c1d9;
+$input-color: rgb(149, 144, 144);
+$title-shadow: 0px 1px 0px #8ab4c6, 0px -1px 0px rgba(0, 0, 0, 0.7);
+
+// $background-color: #335c67;
+// $title-color: #fff3b0;
+// $text-color: #8d1418;
+// $attemptbox-color: #e09f3e;
+// $correct-color: #9e2a2b;
+// $input-color: rgb(149, 144, 144);
+
+@-webkit-keyframes slideInDown {
+  from {
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@-webkit-keyframes flipInX {
+  from {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+
+  60% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    opacity: 1;
+  }
+
+  80% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+
+  to {
+    -webkit-transform: perspective(400px);
+    transform: perspective(400px);
+  }
+}
+
+@keyframes flipInX {
+  from {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+
+  60% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    opacity: 1;
+  }
+
+  80% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+
+  to {
+    -webkit-transform: perspective(400px);
+    transform: perspective(400px);
+  }
+}
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: $background-color;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.1) 1px,
+    transparent 1px,
+    transparent 6px
+  );
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  font-size: calc(10px + 3vmin);
+  font-weight: bolder;
+  font-family: 'Graduate', cursive;
+  text-shadow: $title-shadow;
+  color: $title-color;
+}
+
+.guesses {
+  align-self: baseline;
+  position: fixed;
+  margin: 0;
+  font-size: 34px;
+  color: $title-color;
+  margin-left: 20px;
+  text-shadow: $title-shadow;
+  // text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.3),
+  //   0px -1px 0px rgba(0, 0, 0, 0.7);
+}
+
+.icons {
+  display: flex;
+  padding-right: 20px;
+  align-self: flex-end;
+  position: fixed;
+  color: $title-color;
+}
+.icons span:hover {
+  transform: scale(1.2);
+}
+
+svg {
+  padding: 5px;
+}
+
+.birdy {
+  height: 275px;
+}
+
+h1 {
+  margin: unset;
+}
+
+.popup {
+  width: 40vw;
+  background: $attemptbox-color;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  z-index: 1;
+  left: 30%;
+  top: 5%;
+  border: 3px solid $text-color;
+  border-radius: 8px;
+  padding: 10px;
+  visibility: hidden;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+
+  p {
+    font-size: 18px;
+    text-shadow: none;
+    color: #003049;
+    margin: 3px;
+  }
+
+  ul {
+    font-size: 24px;
+    color: #003049;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    text-shadow: none;
+    list-style: square;
+    margin: 4px;
+
+    li {
+      padding: 8px;
+    }
+  }
+
+  .currPlayer {
+    align-self: center;
+  }
+
+  h4 {
+    margin-bottom: 5px;
+    margin-top: 20px;
+  }
+
+  .popup-btn {
+    border: unset;
+    border-radius: 3px;
+    background-color: $text-color;
+    color: white;
+    font-weight: bold;
+    padding: 0.5em;
+    margin: 25px;
+    width: 30%;
+    align-self: center;
+  }
+
+  #inputs {
+    display: grid;
+    justify-content: center;
+  }
+
+  #login {
+    margin: 10px;
+    width: 250px;
+  }
+
+  #login-btn {
+    border: unset;
+    border-radius: 3px;
+    background-color: $text-color;
+    color: white;
+    font-weight: bold;
+    width: 30%;
+    align-self: center;
+    margin: 6px;
+    height: 40px;
+  }
+
+  .signup_guest {
+    display: flex;
+    justify-content: center;
+  }
+
+  #signup-btn {
+    border: unset;
+    border-radius: 3px;
+    background-color: $text-color;
+    color: white;
+    font-weight: bold;
+    align-self: center;
+    margin: 6px;
+    height: 40px;
+  }
+}
+
+.open-popup {
+  visibility: visible;
+  animation: slideInDown 0.5s;
+}
+
+form {
+  width: 500px;
+}
+
+input {
+  border: unset;
+  border-radius: 3px;
+  background-color: $input-color;
+  padding: 0.5em;
+  color: white;
+  font-weight: bold;
+  margin: 20px;
+  width: 80%;
+}
+
+input:hover {
+  background-color: lighten($input-color, 30%);
+}
+
+.wrapper {
+  display: inline-block;
+  position: relative;
+  width: 60%;
+}
+
+.btn-submit {
+  border: unset;
+  border-radius: 3px;
+  background-color: $text-color;
+  color: white;
+  font-weight: bold;
+  padding: 0.5em;
+  margin: 3px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-submit:hover {
+  transform: scale(1.1);
+}
+
+.player-list {
+  list-style: none;
+  padding: unset;
+  margin: unset;
+  text-align: left;
+  position: absolute;
+  width: 100%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.player-list li {
+  border: 1px solid lighten($input-color, 30%);
+  border-top: unset;
+  background-color: $input-color;
+}
+.player-list button {
+  border: unset;
+  background: unset;
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.5em;
+  color: white;
+  font-weight: bold;
+}
+
+.player-list li:hover {
+  background-color: $text-color;
+}
+
+.attempt {
+  background-color: $attemptbox-color;
+  display: flex;
+  font-weight: none;
+  margin-top: 5px;
+  height: 70px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  animation: flipInX 0.5s;
+}
+
+table {
+  width: 65%;
+  vertical-align: middle;
+  color: $text-color;
+  margin-top: 10px;
+  margin-bottom: 200px;
+  text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.3),
+    0px -1px 0px rgba(0, 0, 0, 0.7);
+}
+
+tbody {
+  display: grid;
+  grid-template-rows: repeat(8, 1fr);
+}
+
+.categories {
+  background-color: $attemptbox-color;
+  font-size: calc(10px + 2vmin);
+  display: flex;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+th {
+  width: 100%;
+  border: 1px solid $text-color;
+  font-size: 100%;
+  padding-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+td {
+  width: 100%;
+  border: 1px solid $text-color;
+  width: 100%;
+  border: 1px solid #d62828;
+  font-size: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#name {
+  font-size: 50%;
+  padding-top: 2px;
+  display: flex;
+  align-items: center;
+}
+
+#f_b {
+  font-size: 76%;
+}
+
+#height {
+  font-size: 2.3vw;
+}
+
+.correct {
+  background-color: $correct-color;
+}
+
+.currPlayer {
+  background-color: $correct-color;
+  border: 3px solid $text-color;
+  border-radius: 8px;
+  padding: 18px;
+  padding-bottom: 0px;
+}
