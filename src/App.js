@@ -221,8 +221,8 @@ class App extends Component {
             <Instructions instructions={this.state.instructions} />
             <Stats
               stats={this.state.statsWindow}
-              wins={this.state.stats.wins}
-              losses={this.state.stats.losses}
+              // wins={this.state.stats.wins}
+              // losses={this.state.stats.losses}
             />
             <Login
               loginWindow={this.state.loginWindow}
