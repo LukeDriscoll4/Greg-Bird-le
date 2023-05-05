@@ -5,13 +5,13 @@ import {
   GearFill,
 } from 'react-bootstrap-icons';
 
-const Menu_Bar = (props) => {
+const Menu_Bar = ({ setStatsWindow, setInstructionsWindow }) => {
   return (
     <div className='icons'>
-      <span type='button' onClick={props.stats}>
+      <span type='button' onClick={() => setStatsWindow(true)}>
         <BarChartLineFill />
       </span>
-      <span type='button' onClick={props.instructions}>
+      <span type='button' onClick={() => setInstructionsWindow(true)}>
         <QuestionCircle />
       </span>
       <span type='button'>

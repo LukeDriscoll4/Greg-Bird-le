@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Instructions = (props) => {
+const Instructions = ({ instructionsWindow }) => {
   return (
     <div
       className={
-        props.instructions === true ? 'popup' + ' ' + 'open-popup' : 'popup'
+        instructionsWindow === true ? 'popup' + ' ' + 'open-popup' : 'popup'
       }
     >
       <h2>How To Play</h2>
