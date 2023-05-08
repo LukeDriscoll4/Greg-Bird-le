@@ -2,11 +2,7 @@ import React from 'react';
 
 const Instructions = ({ instructionsWindow }) => {
   return (
-    <div
-      className={
-        instructionsWindow === true ? 'popup' + ' ' + 'open-popup' : 'popup'
-      }
-    >
+    <div className={`popup ${instructionsWindow && 'open-popup'}`}>
       <h2>How To Play</h2>
       <h5>
         Guess the NRL player in 8 attempts. In any column, blue indicates a
@@ -15,7 +11,7 @@ const Instructions = ({ instructionsWindow }) => {
       <p>Categories include:</p>
       <ul>
         <li>
-          Does the player play for a Sydney-based team?{' '}
+          Does the player play for a Sydney-based team?
           <p>
             ie. Canterbury, Cronulla, Manly, Parramatta, Penrith, South Sydney,
             St. George, Sydney, or Wests

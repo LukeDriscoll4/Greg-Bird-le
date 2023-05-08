@@ -1,55 +1,55 @@
 import React from 'react';
 
-const Attempt = (props) => {
-  let sydney;
-  if (props.sydney === true) sydney = '✓';
-  else sydney = 'X';
-  let f_b;
-  if (props.f_b === 'Forward') f_b = 'Forward';
-  else f_b = 'Back';
-  let arrowFunc = (target, guess) => {
-    let arrow;
+const Attempt = ({ targetPlayer, guessedPlayer }) => {
+  let getArrow = (target, guess) => {
+    let arrow = '';
     if (target > guess) arrow = '↑';
     if (target < guess) arrow = '↓';
     return arrow;
   };
+
   return (
     <tr className='attempt'>
       <td
         id='name'
-        className={props.targetPlayer.name === props.name ? 'correct' : ''}
+        className={targetPlayer.name === guessedPlayer.name ? 'correct' : ''}
       >
-        {props.name}
-      </td>
-      <td
-        className={props.targetPlayer.sydney === props.sydney ? 'correct' : ''}
-      >
-        {sydney}
-      </td>
-      <td className={props.targetPlayer.team === props.team ? 'correct' : ''}>
-        {props.team}
-      </td>
-      <td
-        id='f_b'
-        className={props.targetPlayer.f_b === props.f_b ? 'correct' : ''}
-      >
-        {f_b}
+        {guessedPlayer.name}
       </td>
       <td
         className={
-          props.targetPlayer.position === props.position ? 'correct' : ''
+          targetPlayer.sydney === guessedPlayer.sydney ? 'correct' : ''
         }
       >
-        {props.position}
+        {guessedPlayer.sydney ? '✓' : 'X'}
       </td>
-      <td className={props.targetPlayer.age === props.age ? 'correct' : ''}>
-        {props.age} {arrowFunc(props.targetPlayer.age, props.age)}
+      <td className={targetPlayer.team === guessedPlayer.team ? 'correct' : ''}>
+        {guessedPlayer.team}
+      </td>
+      <td
+        id='f_b'
+        className={targetPlayer.f_b === guessedPlayer.f_b ? 'correct' : ''}
+      >
+        {guessedPlayer.f_b}
+      </td>
+      <td
+        className={
+          targetPlayer.position === guessedPlayer.position ? 'correct' : ''
+        }
+      >
+        {guessedPlayer.position}
+      </td>
+      <td className={targetPlayer.age === guessedPlayer.age ? 'correct' : ''}>
+        {guessedPlayer.age} {getArrow(targetPlayer.age, guessedPlayer.age)}
       </td>
       <td
         id='height'
-        className={props.targetPlayer.height === props.height ? 'correct' : ''}
+        className={
+          targetPlayer.height === guessedPlayer.height ? 'correct' : ''
+        }
       >
-        {props.height} {arrowFunc(props.targetPlayer.height, props.height)}
+        {guessedPlayer.height}{' '}
+        {getArrow(targetPlayer.height, guessedPlayer.height)}
       </td>
     </tr>
   );
