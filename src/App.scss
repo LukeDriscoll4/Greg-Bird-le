@@ -167,6 +167,15 @@ h1 {
   margin: unset;
 }
 
+.popup-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .popup {
   width: 40vw;
   background: $attemptbox-color;
@@ -180,7 +189,7 @@ h1 {
   border: 3px solid $text-color;
   border-radius: 8px;
   padding: 10px;
-  visibility: hidden;
+  // visibility: hidden;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 
   p {

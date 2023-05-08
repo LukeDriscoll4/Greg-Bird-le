@@ -21,7 +21,7 @@ const App = () => {
   const [userInput, setUserInput] = useState(null);
 
   // logic for closing modals (instructions, stats, etc.)
-  document.addEventListener('click', closeMenu);
+  // document.addEventListener('click', closeMenu);
 
   // each time the page loads, retrieve the user's stats and set the player of the day
   useEffect(() => {
@@ -47,11 +47,9 @@ const App = () => {
     setWinner(null);
   };
 
-  const closeMenu = (e) => {
-    if (!e.target.closest('.icons')) {
-      setInstructionsWindow(false);
-      setStatsWindow(false);
-    }
+  const closeMenu = () => {
+    setInstructionsWindow(false);
+    setStatsWindow(false);
   };
 
   const handleSubmit = () => {
@@ -87,24 +85,28 @@ const App = () => {
         <div id='skeleton'>
           <img src={image} alt='Greg Bird' className='birdy'></img>
           <h1>Greg Bird-le</h1>
-          <Popup
-            winner={winner}
-            image={playerOfTheDay.image}
-            name={playerOfTheDay.name}
-            playAgain={playAgain}
-          />
-          <Instructions instructionsWindow={instructionsWindow} />
-          <Stats
-            statsWindow={statsWindow}
-            wins={stats.wins}
-            losses={stats.losses}
-          />
         </div>
         <Dropdown
           handleUserInput={handleUserInput}
           userInput={userInput}
           handleSubmit={handleSubmit}
         ></Dropdown>
+        <Popup
+          winner={winner}
+          image={playerOfTheDay.image}
+          name={playerOfTheDay.name}
+          playAgain={playAgain}
+        />
+        <Instructions
+          instructionsWindow={instructionsWindow}
+          closeMenu={closeMenu}
+        />
+        <Stats
+          statsWindow={statsWindow}
+          wins={stats.wins}
+          losses={stats.losses}
+          closeMenu={closeMenu}
+        />
         <AttemptsContainer attempts={attempts} targetPlayer={playerOfTheDay} />
       </header>
     </div>
