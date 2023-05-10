@@ -1,15 +1,14 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.scss';
 import Menu_Bar from './components/Menu_Bar.jsx';
+import Dropdown from './components/Dropdown.jsx';
 import Popup from './components/Popup.jsx';
-import AttemptsContainer from './containers/AttemptsContainer.jsx';
-import players from './db/players.js';
-import image from './image.png';
 import Instructions from './components/Instructions.jsx';
 import Stats from './components/Stats.jsx';
+import AttemptsContainer from './containers/AttemptsContainer.jsx';
+import players from './db/players.js';
+import greg from './image.png';
 import confetti from 'canvas-confetti';
-import axios from 'axios';
-import Dropdown from './components/Dropdown.jsx';
 
 const App = () => {
   const [attempts, setAttempts] = useState([]);
@@ -19,9 +18,6 @@ const App = () => {
   const [statsWindow, setStatsWindow] = useState(false);
   const [stats, setStats] = useState({ wins: 0, losses: 0 });
   const [userInput, setUserInput] = useState(null);
-
-  // logic for closing modals (instructions, stats, etc.)
-  // document.addEventListener('click', closeMenu);
 
   // each time the page loads, retrieve the user's stats and set the player of the day
   useEffect(() => {
@@ -76,39 +72,37 @@ const App = () => {
 
   return (
     <div className='App'>
-      <header className='App-header'>
-        <p className='guesses'>Guesses: {attempts.length} of 8</p>
-        <Menu_Bar
-          setInstructionsWindow={setInstructionsWindow}
-          setStatsWindow={setStatsWindow}
-        />
-        <div id='skeleton'>
-          <img src={image} alt='Greg Bird' className='birdy'></img>
-          <h1>Greg Bird-le</h1>
-        </div>
-        <Dropdown
-          handleUserInput={handleUserInput}
-          userInput={userInput}
-          handleSubmit={handleSubmit}
-        ></Dropdown>
-        <Popup
-          winner={winner}
-          image={playerOfTheDay.image}
-          name={playerOfTheDay.name}
-          playAgain={playAgain}
-        />
-        <Instructions
-          instructionsWindow={instructionsWindow}
-          closeMenu={closeMenu}
-        />
-        <Stats
-          statsWindow={statsWindow}
-          wins={stats.wins}
-          losses={stats.losses}
-          closeMenu={closeMenu}
-        />
-        <AttemptsContainer attempts={attempts} targetPlayer={playerOfTheDay} />
-      </header>
+      <p className='guesses'>Guesses: {attempts.length} of 8</p>
+      <Menu_Bar
+        setInstructionsWindow={setInstructionsWindow}
+        setStatsWindow={setStatsWindow}
+      />
+      <div id='skeleton'>
+        <img src={greg} alt='Greg Bird' className='birdy'></img>
+        <h1>Greg Bird-le</h1>
+      </div>
+      <Dropdown
+        handleUserInput={handleUserInput}
+        userInput={userInput}
+        handleSubmit={handleSubmit}
+      ></Dropdown>
+      <Popup
+        winner={winner}
+        image={playerOfTheDay.image}
+        name={playerOfTheDay.name}
+        playAgain={playAgain}
+      />
+      <Instructions
+        instructionsWindow={instructionsWindow}
+        closeMenu={closeMenu}
+      />
+      <Stats
+        statsWindow={statsWindow}
+        wins={stats.wins}
+        losses={stats.losses}
+        closeMenu={closeMenu}
+      />
+      <AttemptsContainer attempts={attempts} targetPlayer={playerOfTheDay} />
     </div>
   );
 };

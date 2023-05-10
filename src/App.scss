@@ -15,6 +15,7 @@ $title-shadow: 0px 1px 0px #8ab4c6, 0px -1px 0px rgba(0, 0, 0, 0.7);
 // $correct-color: #9e2a2b;
 // $input-color: rgb(149, 144, 144);
 
+// animation used for win/lose popup
 @-webkit-keyframes slideInDown {
   from {
     -webkit-transform: translate3d(0, -100%, 0);
@@ -41,6 +42,7 @@ $title-shadow: 0px 1px 0px #8ab4c6, 0px -1px 0px rgba(0, 0, 0, 0.7);
   }
 }
 
+// animation used for addition of new attempt row
 @-webkit-keyframes flipInX {
   from {
     -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
@@ -109,9 +111,6 @@ $title-shadow: 0px 1px 0px #8ab4c6, 0px -1px 0px rgba(0, 0, 0, 0.7);
 
 .App {
   text-align: center;
-}
-
-.App-header {
   background-color: $background-color;
   background-image: repeating-linear-gradient(
     -45deg,
@@ -140,8 +139,6 @@ $title-shadow: 0px 1px 0px #8ab4c6, 0px -1px 0px rgba(0, 0, 0, 0.7);
   color: $title-color;
   margin-left: 20px;
   text-shadow: $title-shadow;
-  // text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.3),
-  //   0px -1px 0px rgba(0, 0, 0, 0.7);
 }
 
 .icons {
@@ -149,14 +146,13 @@ $title-shadow: 0px 1px 0px #8ab4c6, 0px -1px 0px rgba(0, 0, 0, 0.7);
   padding-right: 20px;
   align-self: flex-end;
   position: fixed;
+  gap: 10px;
   color: $title-color;
-}
-.icons span:hover {
-  transform: scale(1.2);
+  cursor: pointer;
 }
 
-svg {
-  padding: 5px;
+.icons span:hover {
+  transform: scale(1.2);
 }
 
 .birdy {
@@ -167,6 +163,7 @@ h1 {
   margin: unset;
 }
 
+// overlay taking up full screen when popup is open, dims and allows for click-to-close
 .popup-overlay {
   position: fixed;
   left: 0;
@@ -176,8 +173,12 @@ h1 {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+// TODO - make popup responsive to changes in screen size (gets too skinny)
 .popup {
   width: 40vw;
+  min-height: fit-content;
+  max-height: 85vh;
+  overflow: scroll;
   background: $attemptbox-color;
   position: fixed;
   display: flex;
@@ -189,7 +190,6 @@ h1 {
   border: 3px solid $text-color;
   border-radius: 8px;
   padding: 10px;
-  // visibility: hidden;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 
   p {
@@ -216,6 +216,11 @@ h1 {
 
   .currPlayer {
     align-self: center;
+    background-color: $correct-color;
+    border: 3px solid $text-color;
+    border-radius: 8px;
+    padding: 18px;
+    padding-bottom: 0px;
   }
 
   h4 {
@@ -234,74 +239,6 @@ h1 {
     width: 30%;
     align-self: center;
   }
-
-  #inputs {
-    display: grid;
-    justify-content: center;
-  }
-
-  #login {
-    margin: 10px;
-    width: 250px;
-  }
-
-  #login-btn {
-    border: unset;
-    border-radius: 3px;
-    background-color: $text-color;
-    color: white;
-    font-weight: bold;
-    width: 30%;
-    align-self: center;
-    margin: 6px;
-    height: 40px;
-  }
-
-  .signup_guest {
-    display: flex;
-    justify-content: center;
-  }
-
-  #signup-btn {
-    border: unset;
-    border-radius: 3px;
-    background-color: $text-color;
-    color: white;
-    font-weight: bold;
-    align-self: center;
-    margin: 6px;
-    height: 40px;
-  }
-}
-
-.open-popup {
-  visibility: visible;
-  animation: slideInDown 0.5s;
-}
-
-form {
-  width: 500px;
-}
-
-input {
-  border: unset;
-  border-radius: 3px;
-  background-color: $input-color;
-  padding: 0.5em;
-  color: white;
-  font-weight: bold;
-  margin: 20px;
-  width: 80%;
-}
-
-input:hover {
-  background-color: lighten($input-color, 30%);
-}
-
-.wrapper {
-  display: inline-block;
-  position: relative;
-  width: 60%;
 }
 
 .btn-submit {
@@ -313,43 +250,14 @@ input:hover {
   padding: 0.5em;
   margin: 3px;
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .btn-submit:hover {
   transform: scale(1.1);
 }
 
-.player-list {
-  list-style: none;
-  padding: unset;
-  margin: unset;
-  text-align: left;
-  position: absolute;
-  width: 100%;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-
-.player-list li {
-  border: 1px solid lighten($input-color, 30%);
-  border-top: unset;
-  background-color: $input-color;
-}
-.player-list button {
-  border: unset;
-  background: unset;
-  display: block;
-  width: 100%;
-  text-align: left;
-  padding: 0.5em;
-  color: white;
-  font-weight: bold;
-}
-
-.player-list li:hover {
-  background-color: $text-color;
-}
-
+// TODO - make attempt column borders line up
 .attempt {
   background-color: $attemptbox-color;
   display: flex;
@@ -373,14 +281,6 @@ table {
 tbody {
   display: grid;
   grid-template-rows: repeat(8, 1fr);
-}
-
-.categories {
-  background-color: $attemptbox-color;
-  font-size: calc(10px + 2vmin);
-  display: flex;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 th {
@@ -421,12 +321,4 @@ td {
 
 .correct {
   background-color: $correct-color;
-}
-
-.currPlayer {
-  background-color: $correct-color;
-  border: 3px solid $text-color;
-  border-radius: 8px;
-  padding: 18px;
-  padding-bottom: 0px;
 }
